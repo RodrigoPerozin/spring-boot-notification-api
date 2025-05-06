@@ -8,20 +8,24 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 import com.notificationapi.notificationapi.model.Notification;
+import com.notificationapi.notificationapi.model.NotificationDTO;
 import com.notificationapi.notificationapi.repositories.NotificationsRepository;
 
 import java.util.List;
 
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/notification")
 public class NotificationController {
 
     public NotificationsRepository notificationsRepository = new NotificationsRepository();
@@ -45,8 +49,12 @@ public class NotificationController {
         @ApiResponse(responseCode = "400", description = "Erro na listagem das notificações"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public List<Notification> select() {
-        return notificationsRepository.getNotifications();
+    public ResponseEntity<List<Notification>> select() {
+        List<Notification> notifications = notificationsRepository.getNotifications();
+        if (notifications == null || notifications.isEmpty()) {
+            return ResponseEntity.status(HttpStatusCode.valueOf(401)).body(null);
+        }
+        return ResponseEntity.ok(notifications);
     }
 
     @GetMapping("select/{id}")
@@ -64,7 +72,7 @@ public class NotificationController {
         return ResponseEntity.ok(notification);
     }
 
-    @GetMapping("delete")
+    @DeleteMapping("delete")
     @Operation(summary = "Destrói todas as notificações")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Notificações destruídas com sucesso"),
@@ -75,7 +83,7 @@ public class NotificationController {
         return ResponseEntity.ok().body(null);
     }
 
-    @GetMapping("delete/{id}")
+    @DeleteMapping("delete/{id}")
     @Operation(summary = "Destrói uma notificação")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Notificação destruída com sucesso"),
@@ -99,12 +107,12 @@ public class NotificationController {
         @ApiResponse(responseCode = "401", description = "Notificação não encontrada"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public ResponseEntity<Notification> update(@PathVariable("id") String id, @RequestBody @Valid Notification notification) {
+    public ResponseEntity<Notification> update(@PathVariable("id") String id, @RequestBody @Valid NotificationDTO notificationDto) {
         Notification notificationToUpdate = notificationsRepository.getNotification(id);
         if (notificationToUpdate == null) {
             return ResponseEntity.status(HttpStatusCode.valueOf(401)).body(null);
         }else{
-            notificationsRepository.updateNotification(id, notification);
+            notificationsRepository.updateNotification(id, notificationDto);
         }
         return ResponseEntity.ok().body(null);
     }
