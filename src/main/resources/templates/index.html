@@ -3,13 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notification API</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Notification API</title> 
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/sw.js"></script>
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2015/12/16/17/41/bell-1096280_1280.png">
 </head>
 <body>
     <h1>ALL RIGHTS RESERVED ©PRZ</h1>
     <h3 onclick="goTo('documentation/swagger-ui.html')"> > Documentation </h3>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const publicVapidKey = 'SUA_CHAVE_PUBLICA_VAPID_AQUI';
+
+        if (!("Notification" in window)) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "This browser does not support desktop notifications.",
+                theme: "dark",
+                backdrop: false
+            });
+        }else{
+            if (Notification.permission !== "denied") {
+
+                Notification.requestPermission().then(async (permission) => {
+                    if (permission === "granted") {
+                        console.log("Permissão concedida! 🎉");
+                        if ('serviceWorker' in navigator && 'PushManager' in window) {
+                            navigator.serviceWorker.register('/assets/js/sw.js').then(reg => {
+                                console.log('Service Worker registrado');
+                            });
+                        }
+                        const subscription = await reg.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+                        });
+                        await fetch('/subscribe', {
+                            method: 'POST',
+                            body: JSON.stringify(subscription),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => {
+                            if (response.status === 200) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Subscribed!",
+                                    theme: "dark",
+                                    backdrop: false
+                                });
+                            } else {
+                                console.error('Falha ao inscrever: ', response.statusText);
+                            }
+                        }).catch(err => {
+                            console.error('Erro ao inscrever: ', err);
+                        });
+                    }
+                });
+
+            }
+        }
+    </script>
 </html>
