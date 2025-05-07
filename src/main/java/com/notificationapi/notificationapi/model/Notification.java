@@ -1,7 +1,5 @@
 package com.notificationapi.notificationapi.model;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
