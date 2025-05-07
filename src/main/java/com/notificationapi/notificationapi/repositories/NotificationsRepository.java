@@ -1,32 +1,58 @@
 package com.notificationapi.notificationapi.repositories;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.notificationapi.notificationapi.model.Notification;
 import com.notificationapi.notificationapi.model.NotificationDTO;
+import com.notificationapi.notificationapi.service.OneTimeTaskManager;
 
-import lombok.Data;
-
-@Data
+@Repository
 public class NotificationsRepository {
     
     private List<Notification> notifications = new ArrayList<Notification>();
+    public OneTimeTaskManager oneTimeTaskManager = new OneTimeTaskManager();
 
     public NotificationsRepository() {
         // Constructor
     }
 
     public void addNotification(Notification notification) {
+        
         notifications.add(notification);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(notification.getTimestamp(), formatter);
+        ZoneId zoneId = ZoneId.of("America/Sao_Paulo");
+        ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+
+        Runnable task = () -> {
+            System.out.println("Notification: " + notification.getMessage());
+        };
+
+        oneTimeTaskManager.scheduleTask(notification.getId(), zonedDateTime, task);
     }
 
     public void destroyNotification(Notification notification) {
+        
         notifications.remove(notification);
+        
+        oneTimeTaskManager.cancelTask(notification.getId());
+
     }
 
     public void destroyNotifications() {
+
         notifications.clear();
+    
+        oneTimeTaskManager.cancelAllTasks();
+
     }
 
     public List<Notification> getNotifications() {
@@ -61,7 +87,7 @@ public class NotificationsRepository {
                 if (notificationDto.getSender() != null) notification.setSender(notificationDto.getSender()); else notification.setSender(notifications.get(i).getSender());   
 
                 if (notificationDto.getTimestamp() != null) notification.setTimestamp(notificationDto.getTimestamp()); else notification.setTimestamp(notifications.get(i).getTimestamp());
-            
+
                 notifications.set(i, notification);
                 return notification;
 

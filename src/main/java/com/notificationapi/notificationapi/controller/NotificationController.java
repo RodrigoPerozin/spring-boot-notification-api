@@ -37,9 +37,9 @@ public class NotificationController {
         @ApiResponse(responseCode = "400", description = "Erro na criação da notificação"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
-    public Notification create(@RequestBody @Valid Notification notification) {
+    public ResponseEntity<Notification> create(@RequestBody @Valid Notification notification) {
         notificationsRepository.addNotification(notification);
-        return notification;
+        return ResponseEntity.ok(notification);
     }
 
     @GetMapping("select")

@@ -17,7 +17,7 @@ public class MainController {
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public String index() {
-        return "index.html";
+        return "index";
     }
     
 }
