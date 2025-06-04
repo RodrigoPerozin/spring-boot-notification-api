@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 import com.notificationapi.notificationapi.model.Notification;
-import com.notificationapi.notificationapi.model.NotificationDTO;
+import com.notificationapi.notificationapi.model.DTOs.NotificationDTO;
 import com.notificationapi.notificationapi.repositories.NotificationsRepository;
 
 import java.util.List;
@@ -47,6 +47,7 @@ public class NotificationController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Notificações listadas com sucesso"),
         @ApiResponse(responseCode = "400", description = "Erro na listagem das notificações"),
+        @ApiResponse(responseCode = "401", description = "Nenhuma notificação encontrada"),
         @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<List<Notification>> select() {

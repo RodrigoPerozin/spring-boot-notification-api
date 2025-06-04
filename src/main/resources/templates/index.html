@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notification API</title> 
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/sw.js"></script>
-    <link rel="stylesheet" href="assets/css/index.css">
-    <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2015/12/16/17/41/bell-1096280_1280.png">
-</head>
-<body>
-    <h1>ALL RIGHTS RESERVED ©PRZ</h1>
-    <h3 onclick="goTo('documentation/swagger-ui.html')"> > Documentation </h3>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notification API</title> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="assets/js/index.js"></script>
+        <script src="assets/js/sw.js"></script>
+        <script src="assets/js/md5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="assets/css/index.css">
+        <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2015/12/16/17/41/bell-1096280_1280.png">
+    </head>
+    <body>
+        <h1>ALL RIGHTS RESERVED ©PRZ</h1>
+        <div class="no-wrap d-flex gap-1">
+            <h3 hidden class="discret" onclick="goTo('documentation/swagger-ui.html')"> > API Documentation </h3>
+            <div id="login-form" class="d-flex">
+                <div>
+                    <h3 class="login-label">User</h3>
+                    <input type="text" id="login" name="login" placeholder="User" autocomplete="username" required>
+                </div>
+                <div>
+                    <h3 class="login-label">Password</h3>
+                    <input type="text" id="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                </div>
+                <div class="submit-div d-flex">
+                    <button type="button" class="login-button" onclick="login()">Login</button>
+                </div>
+            </div>
+        </div>
+        <span>Don't have a account yet? <a href="#">Sign-up</a></span>
+    </body>
     <script>
-        const publicVapidKey = 'SUA_CHAVE_PUBLICA_VAPID_AQUI';
 
+        const publicVapidKey = async () => {
+            var key = await fetch('/public_key');
+            return key.text();
+        }
+        
         if (!("Notification" in window)) {
             Swal.fire({
                 icon: "error",
@@ -29,38 +51,44 @@
             if (Notification.permission !== "denied") {
 
                 Notification.requestPermission().then(async (permission) => {
+
                     if (permission === "granted") {
+
                         console.log("Permissão concedida! 🎉");
-                        if ('serviceWorker' in navigator && 'PushManager' in window) {
-                            navigator.serviceWorker.register('/assets/js/sw.js').then(reg => {
-                                console.log('Service Worker registrado');
+                        const reg = await navigator.serviceWorker.register('/assets/js/sw.js');
+                        const existingSubscription = await reg.pushManager.getSubscription();
+                        //if (existingSubscription) await existingSubscription.unsubscribe();
+                        if ('serviceWorker' in navigator && 'PushManager' in window && !existingSubscription)  {
+
+                            console.log('Service Worker registrado');
+                            var public_key = await publicVapidKey();
+                            const subscription = await reg.pushManager.subscribe({
+                                userVisibleOnly: true,
+                                applicationServerKey: urlBase64ToUint8Array(public_key)
                             });
+
+                            await fetch('/subscribe', {
+                                method: 'POST',
+                                body: JSON.stringify(subscription),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then(response => {
+                                if (response.status !== 200) {
+                                    console.error('Falha ao inscrever: ', response.statusText);
+                                }
+                            }).catch(err => {
+                                console.error('Erro ao inscrever: ', err);
+                            });
+
                         }
-                        const subscription = await reg.pushManager.subscribe({
-                            userVisibleOnly: true,
-                            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-                        });
-                        await fetch('/subscribe', {
-                            method: 'POST',
-                            body: JSON.stringify(subscription),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }).then(response => {
-                            if (response.status === 200) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Subscribed!",
-                                    theme: "dark",
-                                    backdrop: false
-                                });
-                            } else {
-                                console.error('Falha ao inscrever: ', response.statusText);
-                            }
-                        }).catch(err => {
-                            console.error('Erro ao inscrever: ', err);
-                        });
+
+                        if(existingSubscription){
+                            console.log('Inscrição existente encontrada!');
+                        }
+
                     }
+
                 });
 
             }

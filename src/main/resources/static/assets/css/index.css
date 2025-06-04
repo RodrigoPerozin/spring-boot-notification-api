@@ -5,6 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100vh;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
@@ -15,8 +16,10 @@ h1 {
     margin-bottom: 1rem;
     font-size: 4rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid rgb(187, 186, 186);
+    padding-bottom: 20px;
 }
-h3 {
+h3.discret{
     opacity: 0.8;
     margin-top: 0.5rem;
     font-size: 1.8rem;
@@ -24,4 +27,71 @@ h3 {
     border-bottom: 2px solid rgb(187, 186, 186);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+}
+.no-wrap{
+    flex-wrap: nowrap;
+}
+.d-flex {
+    display: flex;
+}
+.gap-1{
+    gap: 1rem;
+}
+.login-label{
+    font-size: 1.8rem;
+    color: white;
+}
+a{
+    color: #dbe4ff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+#login-form{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+#login-form div{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+#login-form div h3{
+    width: 10rem;
+    padding-left: 10px;
+}
+input{
+    margin: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    height: 2.4rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 4px;
+}
+input:hover{
+    background-color: #f1f1ff;
+}
+span{
+    padding-bottom: 40px;
+}
+.submit-div{
+    width: 100%;
+    padding: 15px;
+    justify-content: center;
+}
+button{
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 95%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+    background-color: #f1f1ff;
 }

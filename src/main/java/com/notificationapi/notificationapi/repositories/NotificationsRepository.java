@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.notificationapi.notificationapi.model.Notification;
-import com.notificationapi.notificationapi.model.NotificationDTO;
+import com.notificationapi.notificationapi.model.DTOs.NotificationDTO;
 import com.notificationapi.notificationapi.service.OneTimeTaskManager;
 
 @Repository

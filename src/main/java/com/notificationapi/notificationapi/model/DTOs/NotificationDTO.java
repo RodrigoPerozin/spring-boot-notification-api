@@ -1,4 +1,4 @@
-package com.notificationapi.notificationapi.model;
+package com.notificationapi.notificationapi.model.DTOs;
 
 import java.util.UUID;
 
