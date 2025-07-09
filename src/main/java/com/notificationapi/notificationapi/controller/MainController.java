@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 public class MainController {
     
     @GetMapping("/")
-    @Operation(summary = "Redireciona para a tela de apresentação")
+    @Operation(summary = "Redireciona para a tela de login")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Página entregue comm sucesso"),
         @ApiResponse(responseCode = "400", description = "Erro na obtenção da página"),
@@ -21,6 +21,28 @@ public class MainController {
     })
     public String index() {
         return "index";
+    }
+
+    @GetMapping("/home")
+    @Operation(summary = "Redireciona para a tela de início")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Página entregue comm sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro na obtenção da página"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping("/profile")
+    @Operation(summary = "Redireciona para a tela de perfil do usuário")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Página entregue comm sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro na obtenção da página"),
+        @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    public String profile() {
+        return "profile";
     }
 
     @GetMapping("/public_key")

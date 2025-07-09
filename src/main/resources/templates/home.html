@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notification API</title> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="assets/js/index.js"></script>
+        <script src="assets/js/sw.js"></script>
+        <script src="assets/js/md5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="assets/css/home.css">
+        <link rel="stylesheet" href="assets/css/sidebar.css">
+        <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2015/12/16/17/41/bell-1096280_1280.png">
+    </head>
+    <body>
+        <header>
+            <h1>Notification API</h1>
+        </header>
+        <div class="d-flex root">
+            <div class="sidebar">
+                <button class="sidebar-btn">Home</button>
+                <button class="sidebar-btn" onclick="goToProfile()">Profile</button>
+                <button class="sidebar-btn" onclick="logout()">Logout</button>
+            </div>
+            <section>
+                <h1>Welcome <span id="user-name"></span>!</h1>
+            </section>
+        </div>
+        <script src="assets/js/home.js"></script>
+    </body>
+</html>

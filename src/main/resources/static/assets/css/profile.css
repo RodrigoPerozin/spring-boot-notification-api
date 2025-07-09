@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+header{
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #5f1ea5, #1d56b7);
+    box-shadow: #5f1ea5 0px 0px 10px 0px, #1d56b7 0px 0px 10px 0px;
+}
+h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 5dvh;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.no-wrap{
+    flex-wrap: nowrap;
+}
+.d-flex {
+    display: flex;
+}
+.gap-1{
+    gap: 1rem;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.root{
+    width: 100vw;
+}
+span{
+    margin: 0;
+    padding: 0;
+}
+.user-box{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 60vw;
+    height: 60vh;
+    background-color: #9b65d426;
+    box-shadow: #5f1ea5a4 0px 0px 10px 0px, #1d55b7b7 0px 0px 10px 0px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.user-info-field{
+    gap: 0.5rem;
+    display: flex;
+    justify-content: left;
+}
+
+.user-info-field label{
+    width: 60px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: start;
+    font-size: 2dvh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.user-info-field span{
+    font-size: 2dvh;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.hr{
+    width: 100%;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 1rem 0;
+}
+.session-info{
+    display: flex;
+    width: 100%;
+    text-align: left;
+    justify-content: left;
+    font-size: 2.2dvh;
+    flex-direction: column;
+}
+.session-info-field{
+    gap: 0.5rem;
+    display: flex;
+    justify-content: left;
+}
+
+.session-info-field label{
+    width: 175px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: start;
+    font-size: 2dvh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.session-info-field span{
+    font-size: 2dvh;
+    color: #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+h3{
+    margin-top: 0;
+    width: 100%;
+}
+.user-info{
+    display: flex;
+    flex-direction: row;
+}
+.left-user-info{
+    width: 50%;
+}
+.right-user-info{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.right-user-info img{
+    width: 8dvh;
+}
+.revogue-info{
+    display: flex;
+    width: 100%;
+    text-align: left;
+    justify-content: left;
+    font-size: 2.2dvh;
+    flex-direction: column;
+}
+.revogue-info-field{
+    gap: 0.5rem;
+    display: flex;
+    justify-content: left;
+}
+.revogue-info-field label{
+    width: 300px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: start;
+    font-size: 2dvh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.revoke-btn{
+    width: 250px;
+    min-width: 50px;
+    padding: 0.5rem;
+    background: linear-gradient(180deg, #b68ce3, #7161ea);
+    border: none;
+    border-bottom: 1px solid #6e419d !important;
+    border-radius: 5px;
+    color: rgb(241, 241, 241);
+    font-size: 1.5dvh;
+    font-weight: bold;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.revoke-btn:hover{
+    padding: 0.5rem;
+    background: linear-gradient(180deg, #ba5cf5, #8374f1);
+    border: none;
+    border-bottom: 1px solid #6e419d !important;
+    border-radius: 5px;
+    color: white;
+}

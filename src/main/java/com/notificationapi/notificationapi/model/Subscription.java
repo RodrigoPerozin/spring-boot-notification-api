@@ -1,6 +1,8 @@
 package com.notificationapi.notificationapi.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,8 @@ public class Subscription {
     @Size(min = 3, max = 500, message = "Endpoint must be between 3 and 500 characters")
     private String endpoint;
 
+    @Nullable
+    @Column(name = "expiration_time", nullable = true)
     @Schema(description = "Expiration time of subscription", required = false, minLength = 3)
     private Long expirationTime;
 

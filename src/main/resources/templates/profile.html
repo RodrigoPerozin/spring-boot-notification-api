@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notification API</title> 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="assets/js/index.js"></script>
+        <script src="assets/js/sw.js"></script>
+        <script src="assets/js/md5.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="assets/css/profile.css">
+        <link rel="stylesheet" href="assets/css/sidebar.css">
+        <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2015/12/16/17/41/bell-1096280_1280.png">
+    </head>
+    <body>
+        <header>
+            <h1>Notification API</h1>
+        </header>
+        <div class="d-flex root">
+            <div class="sidebar">
+                <button class="sidebar-btn" onclick="goToHome()">Home</button>
+                <button class="sidebar-btn">Profile</button>
+                <button class="sidebar-btn" onclick="logout()">Logout</button>
+            </div>
+            <section>
+                <div class="user-box">
+                    <div class="user-info">
+                        <div class="left-user-info">
+                            <div class="user-info-field">
+                              <label>Name: </label>
+                              <span id="user-name">
+                            </div>
+                            <div class="user-info-field">
+                               <label>Email: </label>
+                              <span id="user-email">
+                            </div>
+                            <div class="user-info-field">
+                              <label>Role: </label>
+                              <span id="user-role">
+                            </div>
+                        </div>
+                        <div class="right-user-info">
+                            <img id="user-avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png" width="40" alt="User Avatar">
+                        </div>
+                    </div>
+                    <div class="hr"></div>
+                    <div class="session-info">
+                        <h3>Session Information:</h3>
+                        <div class="session-info-field">
+                            <label>Session started at: </label>
+                            <span id="session-started-at">
+                        </div>   
+                        <div class="session-info-field">
+                            <label>Session expires at: </label>
+                            <span id="session-expires-at">
+                        </div> 
+                    </div>
+                    <br>
+                    <div class="session-info">
+                        <div class="revogue-info-field">
+                            <h3>Accept notifications on browser: </h3>
+                        </div> 
+                        <div class="revogue-info-field">
+                            <button class="revoke-button revoke-btn" onclick="revokeNotifications()">Enable Notifications</button> 
+                        </div> 
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script src="assets/js/profile.js"></script>
+    </body>
+</html>

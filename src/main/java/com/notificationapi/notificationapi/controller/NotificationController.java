@@ -13,6 +13,7 @@ import com.notificationapi.notificationapi.repositories.NotificationsRepository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/notification")
 public class NotificationController {
 
-    public NotificationsRepository notificationsRepository = new NotificationsRepository();
+    @Autowired
+    public NotificationsRepository notificationsRepository;
 
     @PostMapping("create")
     @Operation(summary = "Cria uma nova notificação")

@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+header{
+    display: flex;
+    align-items: center;
+    height: 10vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #5f1ea5, #1d56b7);
+    box-shadow: #5f1ea5 0px 0px 10px 0px, #1d56b7 0px 0px 10px 0px;
+}
+h1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 5dvh;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.no-wrap{
+    flex-wrap: nowrap;
+}
+.d-flex {
+    display: flex;
+}
+.gap-1{
+    gap: 1rem;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.root{
+    width: 100vw;
+}
+span{
+    margin: 0;
+    padding: 0;
+}
